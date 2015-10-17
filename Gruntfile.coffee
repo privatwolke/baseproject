@@ -72,6 +72,10 @@ module.exports = (grunt) ->
 				files: ["Gruntfile.coffee"]
 				tasks: ["coffeelint"]
 
+			bower:
+				files: ["bower.json"]
+				tasks: ["wiredep"]
+
 
 		# grunt-coffelint
 		# Checks CoffeeScript files for common mistakes.
@@ -89,6 +93,19 @@ module.exports = (grunt) ->
 		# Checks CSS files for common mistakes.
 		csslint:
 			src: ["<%= cfg.paths.generated %>/styles/{,*/}*.css"]
+
+
+		# grunt-wiredep
+		wiredep:
+			build:
+				options:
+					directory: "bower_components"
+
+				ignorePath: /^(\.\.\/)*\.\.\//
+				src: [
+					"<%= cfg.paths.src %>/{,/*}*.html"
+					"<%= cfg.paths.src %>/styles/{,/*}.{sass,scss}"
+				]
 
 
 		# grunt-contrib-coffee
@@ -222,6 +239,7 @@ module.exports = (grunt) ->
 
 	grunt.registerTask("build", [
 		"clean"
+		"wiredep"
 		"useminPrepare"
 		"coffeelint"
 		"sass"
