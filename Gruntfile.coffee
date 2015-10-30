@@ -17,6 +17,7 @@ module.exports = (grunt) ->
 
 	require("jit-grunt") grunt,
 		useminPrepare: "grunt-usemin"
+		spec: "grunt-jasmine-bundle"
 
 
 	grunt.initConfig
@@ -263,4 +264,11 @@ module.exports = (grunt) ->
 		"coffee"
 		"browserSync"
 		"watch"
+	])
+
+	grunt.registerTask("test", [
+		"clean"
+		"coffeelint"
+		"coffee"
+		"spec"
 	])

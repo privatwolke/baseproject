@@ -1,1 +1,3 @@
-console.log "Hello World!"
+hello = (name) -> "Hello, #{name}!"
+
+exports.hello = hello
